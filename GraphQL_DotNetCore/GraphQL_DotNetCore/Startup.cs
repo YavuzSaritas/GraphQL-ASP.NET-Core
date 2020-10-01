@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GraphQL;
+using GraphQL.Client.Abstractions;
+using GraphQL.Client.Http;
+using GraphQL.Client.Serializer.Newtonsoft;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using GraphQL_DotNetCore.Contracts;
 using GraphQL_DotNetCore.Entities;
+using GraphQL_DotNetCore.GraphQL;
 using GraphQL_DotNetCore.GraphQL.GraphQLSchema;
 using GraphQL_DotNetCore.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -37,6 +41,8 @@ namespace GraphQL_DotNetCore
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
             services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IGraphQLClient>(s => new GraphQLHttpClient(Configuration["GraphQLURI"], new NewtonsoftJsonSerializer()));// -->GraphQL api URL
+            services.AddScoped<OwnerConsumer>();
             services.AddControllers()
 .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
