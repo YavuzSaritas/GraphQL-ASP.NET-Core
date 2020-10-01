@@ -4,3 +4,9 @@
 3- Install-Package GraphQL.Server.Ui.Playground -Version 3.4.0
 4-Install-Package GraphQL.Client -Version 3.1.2
 5-Install-Package GraphQL.Client.Serializer.Newtonsoft -Version 3.1.2
+
+https://prnt.sc/urbz2n
+https://prnt.sc/urbzc8
+https://prnt.sc/urbzl7
+https://prnt.sc/urbzsq
+https://prnt.sc/urc019
