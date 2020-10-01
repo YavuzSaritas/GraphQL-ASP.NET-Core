@@ -10,5 +10,8 @@ namespace GraphQL_DotNetCore.Contracts
     {
         List<Owner> GetAll();
         Owner GetById(Guid id);
+        Owner CreateOwner(Owner owner);
+        Owner UpdateOwner(Owner dbOwner, Owner owner);
+        string DeleteOwner(Owner owner);
     }
 }
