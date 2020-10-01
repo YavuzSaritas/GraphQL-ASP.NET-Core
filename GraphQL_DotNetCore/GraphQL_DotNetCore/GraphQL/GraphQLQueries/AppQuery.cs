@@ -1,4 +1,5 @@
-﻿using GraphQL.Types;
+﻿using GraphQL;
+using GraphQL.Types;
 using GraphQL_DotNetCore.Contracts;
 using GraphQL_DotNetCore.GraphQL.GraphQLTypes;
 using System;
@@ -15,6 +16,20 @@ namespace GraphQL_DotNetCore.GraphQL.GraphQLQueries
             Field<ListGraphType<OwnerType>>(
                 "owners",
                 resolve: context =>  repository.GetAll());
+            Field<OwnerType>(
+                "owner",
+                arguments:new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> {Name="ownerId" }),
+                resolve: context =>
+                {
+                    Guid id;
+                    if (!Guid.TryParse(context.GetArgument<string>("ownerId"),out id))
+                    {
+                        context.Errors.Add(new ExecutionError("Wrong value for guid")); // --> Error handling
+                        return null;
+                    }
+                   // var id = context.GetArgument<Guid>("ownerId"); --> basic
+                    return repository.GetById(id);
+                });
         }
     }
 }

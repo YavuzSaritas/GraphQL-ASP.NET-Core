@@ -16,5 +16,7 @@ namespace GraphQL_DotNetCore.Repository
         }
 
         public List<Owner> GetAll() => _context.Owners.ToList();
+
+        public Owner GetById(Guid id) => _context.Owners.SingleOrDefault(p => p.Id.Equals(id));
     }
 }

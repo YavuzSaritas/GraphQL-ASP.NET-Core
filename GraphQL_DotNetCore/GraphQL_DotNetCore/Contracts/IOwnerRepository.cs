@@ -9,5 +9,6 @@ namespace GraphQL_DotNetCore.Contracts
     public interface IOwnerRepository
     {
         List<Owner> GetAll();
+        Owner GetById(Guid id);
     }
 }

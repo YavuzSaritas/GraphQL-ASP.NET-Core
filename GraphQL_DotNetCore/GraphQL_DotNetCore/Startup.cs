@@ -44,7 +44,8 @@ namespace GraphQL_DotNetCore
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<AppSchema>();
             services.AddGraphQL(o => { o.ExposeExceptions = false; })
-                .AddGraphTypes(ServiceLifetime.Scoped); // --> bütün typelarý ekler         
+                .AddGraphTypes(ServiceLifetime.Scoped) // --> bütün typelarý ekler    
+                .AddDataLoader(); // --> Loader için            
 
             services.Configure<IISServerOptions>(options =>
             {
